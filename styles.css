@@ -11,3 +11,7 @@
     display: flex;
     align-items: center;
 }
+
+.square span {
+    visibility: hidden;
+}
