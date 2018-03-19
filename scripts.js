@@ -32,7 +32,7 @@ function mouseOver(event) {
   let t = event.target;
   let spanText = t.children[0];
   spanText.style.visibility = "visible";
-}
+} 
 
 function mouseOut(event) {
   let t = event.target;
