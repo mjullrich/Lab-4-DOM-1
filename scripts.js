@@ -12,27 +12,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function mydiv() {
 
-  let index = document.getElementsByClassName("square").length;
+  let squares = document.getElementsByClassName("square");
+  let numSquares = squares.length;
+  let index = numSquares ? parseInt(squares[numSquares - 1].id) + 1: 1;
   let div = document.createElement("div");
- 
+
   div.className = "square";
   div.id = "" + index;
   div.innerHTML = "<span>Id = " + index + "</span>";
   div.onmouseover = mouseOver;
   div.onmouseout = mouseOut;
-   div.onclick = function (event) {
+
+  div.onclick = function (event) {
     assignRandomColor(event);
+  }
+
+  div.ondblclick = function (event) {
     handleDeletes(event);
   }
 
   document.body.appendChild(div);
 }
 
-function mouseOver(event) { 
+function mouseOver(event) {
   let t = event.target;
   let spanText = t.children[0];
   spanText.style.visibility = "visible";
-} 
+}
 
 function mouseOut(event) {
   let t = event.target;
@@ -48,7 +54,26 @@ function assignRandomColor(event) {
 }
 
 function handleDeletes(event) {
-  parseInt(target.id, 10);
-  let tt = event.target.id;
 
-}
+  let divEl = event.target;
+  let numId = parseInt(divEl.id);
+  let isEven = numId % 2 == 0;
+
+  if (isEven) {
+    let nextSib = divEl.nextSibling;
+    if (nextSib && nextSib.className == "square") {
+      nextSib.remove();
+    } else {
+      alert("No Next");
+    }
+    
+  } else {
+    let prevSib = divEl.previousSibling;
+    if (prevSib && prevSib.className == "square") {
+      prevSib.remove();
+    } else {
+      alert("No Previous");
+    }
+
+  }
+};
